@@ -1,0 +1,22 @@
+{
+  "name": "Warung Pribadi - Kasir & Stok",
+  "short_name": "WarungPribadi",
+  "description": "Aplikasi Kasir, Manajemen Stok, Kasbon & Laporan Warung Offline-First",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
