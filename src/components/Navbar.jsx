@@ -1,9 +1,23 @@
-import React from 'react';
-import { ShoppingCart, Package, BookOpen, BarChart3, Store, Truck, HardDrive, Edit3 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingCart, Package, BookOpen, BarChart3, Store, Truck, HardDrive, Edit3, Wifi, WifiOff } from 'lucide-react';
 import { profileService } from '../services/profileService';
 
 export default function Navbar({ activeTab, setActiveTab, lowStockCount = 0, unpaidDebtCount = 0, onOpenProfile }) {
   const shopProfile = profileService.getProfile();
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   return (
     <>
@@ -148,8 +162,19 @@ export default function Navbar({ activeTab, setActiveTab, lowStockCount = 0, unp
               </button>
             </nav>
 
-            {/* Mobile Top Header Action Buttons */}
+            {/* Mobile Top Header & Connection Badge */}
             <div className="md:hidden flex items-center space-x-1.5">
+              <div
+                className={`px-2 py-1 rounded-lg text-[10px] font-bold flex items-center space-x-1 border ${
+                  isOnline
+                    ? 'bg-slate-800 text-emerald-400 border-slate-700'
+                    : 'bg-amber-950 text-amber-300 border-amber-700 animate-pulse'
+                }`}
+              >
+                {isOnline ? <Wifi className="w-3 h-3 text-emerald-400" /> : <WifiOff className="w-3 h-3 text-amber-400" />}
+                <span>{isOnline ? 'Online' : 'Offline'}</span>
+              </div>
+
               <button
                 onClick={onOpenProfile}
                 className="p-2 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 hover:text-white text-xs font-bold flex items-center space-x-1"
@@ -171,6 +196,18 @@ export default function Navbar({ activeTab, setActiveTab, lowStockCount = 0, unp
                 <HardDrive className="w-3.5 h-3.5" />
                 <span className="text-[10px]">Backup</span>
               </button>
+            </div>
+
+            {/* Desktop Online/Offline Status Indicator */}
+            <div
+              className={`hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                isOnline
+                  ? 'bg-slate-800/80 border-slate-700/60 text-slate-300'
+                  : 'bg-amber-950/80 border-amber-600/60 text-amber-200 animate-pulse'
+              }`}
+            >
+              <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400 animate-ping' : 'bg-amber-400'}`} />
+              <span>{isOnline ? 'Online' : 'Offline (IndexedDB Aktif)'}</span>
             </div>
           </div>
         </div>

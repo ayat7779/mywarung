@@ -7,9 +7,11 @@
     <meta name="description" content="Aplikasi Web Manajemen Warung Pribadi Offline-First (Kasir, Stok, Kasbon, Laporan)" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="WarungPribadi" />
+    <meta name="apple-mobile-web-app-title" content="Warungku" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <title>Warung Pribadi - Kasir & Manajemen Stok</title>
+    <title>Warung Pribadi - Kasir & Stok</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,14 +19,5 @@
   <body class="bg-slate-100 text-slate-800 font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-emerald-500 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch((err) => {
-            console.log('SW registration failed:', err);
-          });
-        });
-      }
-    </script>
   </body>
 </html>
